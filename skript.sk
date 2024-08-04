@@ -1,0 +1,40 @@
+#아래코드는 youtube: 포트, discord: dark_sen_ 의 코드로 무단 복제 밎 판매가 불가능합니다.
+
+####################################################################################
+# 랜덤 데미지
+
+on damage:
+    if victim is player:
+        set {_dmg} to random integer between 1 and 9 #1에서9 사이의 랜덤 데미지
+        set damage to {_dmg}
+        send action bar "&7입은 피해: &a%{_dmg}%" to victim
+
+####################################################################################
+# 랜덤tp
+
+command /랜덤:
+    trigger:
+        loop all players:
+            set {_x} to random integer between -1000 and 1000
+            set {_z} to random integer between -1000 and 1000
+            set {_baseY} to 64 
+            set {_y} to {_baseY}
+            set {_maxY} to 255 
+            set {_found} to false
+            
+            teleport loop-player to location at {_x}, {_y}, {_z}            
+            wait 1 tick 
+            
+            if block at loop-player's location is air:
+                set {_found} to true
+            else:
+                while {_y} is less than {_maxY}:
+                    add 1 to {_y}
+                    teleport loop-player to location at {_x}, {_y}, {_z}
+                    wait 1 tick 
+                    
+                    if block at loop-player's location is air:
+                        set {_found} to true
+                        exit 
+
+####################################################################################
